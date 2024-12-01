@@ -1,26 +1,33 @@
-import { useState, useEffect } from 'react'; // Import React hooks.
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
-  const [products, setProducts] = useState([]); 
-  // Tạo state `products` để lưu danh sách sản phẩm.
+  const [products, setProducts] = useState([]); // Lưu danh sách sản phẩm.
 
+  // Lấy danh sách sản phẩm từ API.
   useEffect(() => {
-    // useEffect: Chạy một lần khi component được render.
-    fetch('/api/products')
-      // Gửi yêu cầu GET tới API `/api/products`.
-      .then((res) => res.json()) // Chuyển đổi phản hồi từ JSON sang JavaScript object.
-      .then((data) => setProducts(data)); 
-      // Cập nhật state `products` với dữ liệu nhận được.
+    fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    const res = await fetch('/api/products');
+    const data = await res.json();
+    setProducts(data);
+  };
 
   return (
     <div>
       <h1>Product List</h1>
+      <Link href="/add">
+        <button>Add Product</button>
+      </Link>
+      {/* Danh sách sản phẩm */}
       <ul>
         {products.map((product) => (
-          // Lặp qua danh sách sản phẩm và hiển thị từng sản phẩm.
           <li key={product.id}>
-            {product.name} - ${product.price}
+            <strong>{product.name}</strong> - ${product.price}
+            <br />
+            {product.description}
           </li>
         ))}
       </ul>
