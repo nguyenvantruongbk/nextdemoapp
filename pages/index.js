@@ -1,31 +1,57 @@
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
 import Layout from '../components/Layout';
+import { useRouter } from 'next/router';
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
+export default function AddProduct() {
+  const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '' });
+  const router = useRouter();
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    const res = await fetch('/api/products');
-    const data = await res.json();
-    setProducts(data);
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
+    const res = await fetch('/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newProduct),
+    });
+    if (res.ok) {
+      setNewProduct({ name: '', description: '', price: '' });
+      router.push('/');
+    }
   };
 
   return (
     <Layout>
-      <h2 className="text-2xl font-bold mb-4">Product List</h2>
-      <ul className="space-y-4">
-        {products.map((product) => (
-          <li key={product.id} className="p-4 bg-white rounded shadow">
-            <h3 className="text-lg font-bold">{product.name}</h3>
-            <p>{product.description}</p>
-            <span className="text-gray-600">${product.price}</span>
-          </li>
-        ))}
-      </ul>
+      <h2 className="text-2xl font-bold mb-4">Add Product</h2>
+      <form onSubmit={handleAddProduct} className="space-y-4">
+        <input
+          type="text"
+          placeholder="Name"
+          value={newProduct.name}
+          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={newProduct.description}
+          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="number"
+          placeholder="Price"
+          value={newProduct.price}
+          onChange={(e) => setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Add Product
+        </button>
+      </form>
     </Layout>
   );
 }
