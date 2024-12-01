@@ -1,18 +1,8 @@
-
-import Header from './Header';
-import Footer from './Footer';
-import Sidebar from './Sidebar';
-
-export default function Layout({ children }) {
+export default function Footer() {
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Header />
-        <main className="flex-1 bg-gray-100 p-6">{children}</main>
-        <Footer />
-      </div>
-    </div>
+    <footer className="bg-gray-800 text-white text-center p-4 mt-auto">
+      <p>&copy; 2024 My Product App. All rights reserved.</p>
+    </footer>
   );
 }
 
