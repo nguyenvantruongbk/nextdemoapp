@@ -9,14 +9,10 @@ export default function Layout({ children }) {
         <nav className="mt-4">
           <ul>
             <li className="my-2">
-              <Link href="/">
-                <a className="hover:underline">Home</a>
-              </Link>
+              <Link href="/" className="hover:underline">Home</Link>
             </li>
             <li className="my-2">
-              <Link href="/add">
-                <a className="hover:underline">Add Product</a>
-              </Link>
+              <Link href="/add" className="hover:underline">Add Product</Link>
             </li>
           </ul>
         </nav>
@@ -30,14 +26,10 @@ export default function Layout({ children }) {
           <nav>
             <ul className="flex space-x-4">
               <li>
-                <Link href="/">
-                  <a className="text-blue-500 hover:underline">Home</a>
-                </Link>
+                <Link href="/" className="text-blue-500 hover:underline">Home</Link>
               </li>
               <li>
-                <Link href="/add">
-                  <a className="text-blue-500 hover:underline">Add Product</a>
-                </Link>
+                <Link href="/add" className="text-blue-500 hover:underline">Add Product</Link>
               </li>
             </ul>
           </nav>
