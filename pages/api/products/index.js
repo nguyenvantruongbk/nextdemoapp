@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // Xử lý yêu cầu POST (thêm sản phẩm mới).
+  // Xử lý yêu cầu POST (thêm sản phẩm mới).fff
   if (req.method === 'POST') {
     const { name, description, price } = req.body;
     // Lấy dữ liệu từ body của yêu cầu (name, description, price).

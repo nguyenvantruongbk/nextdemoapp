@@ -9,7 +9,7 @@ export default function Home() {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await fetch('/api/products');
+    const res = await fetch('http://localhost:8080/api/products');
     const data = await res.json();
     setProducts(data);
   };
