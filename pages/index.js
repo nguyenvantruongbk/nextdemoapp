@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Layout from '../components/Layout';
+// import Layout from '../components/Layout';
+//import Layout from '../components/Layout';
 
 export default function Home() {
-  const [products, setProducts] = useState([]); // Lưu danh sách sản phẩm.
+  const [products, setProducts] = useState([]);
 
-  // Lấy danh sách sản phẩm từ API.
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -16,21 +17,17 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>Product List</h1>
-      <Link href="/add">
-        <button>Add Product</button>
-      </Link>
-      {/* Danh sách sản phẩm */}
-      <ul>
+    <Layout>
+      <h2 className="text-2xl font-bold mb-4">Product List</h2>
+      <ul className="space-y-4">
         {products.map((product) => (
-          <li key={product.id}>
-            <strong>{product.name}</strong> - ${product.price}
-            <br />
-            {product.description}
+          <li key={product.id} className="p-4 bg-white rounded shadow">
+            <h3 className="text-lg font-bold">{product.name}</h3>
+            <p>{product.description}</p>
+            <span className="text-gray-600">${product.price}</span>
           </li>
         ))}
       </ul>
-    </div>
+    </Layout>
   );
 }
